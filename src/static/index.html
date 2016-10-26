@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoTweetsDelete</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+</head>
+<body ng-app='TweetsDelete'>
+<div ng-controller="TweetsDeleteController">
+    <br>
+    <div class="container">
+        <h1> Go Twitter Delete</h1>
+        <br>
+        <h4>Enter Twitter API variables </h4>
+        <br>
+        <form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4">
+                        <label for="consumerKey">Consumer Key</label>
+                        <input class="form-control" type="text" ng-model="consumerKey" id="consumerKey">
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <label for="consumerSecret">Consumer Secret</label>
+                        <input class="form-control" type="text" ng-model="consumerSecret" id="consumerSecret">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4">
+                        <label for="accessToken">Access Token</label>
+                        <input class="form-control" type="text" ng-model="accessToken" id="accessToken">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <label for="accessSecret">Access Secret</label>
+                            <input class="form-control" type="text" ng-model="accessSecret" id="accessSecret">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4">
+                        <label for="userName">USER NAME</label>
+                        <input class="form-control" type="text" ng-model="userName" id="userName">
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-2">
+                        <button type="submit" class="btn btn-primary"
+                                ng-click="deleteAllTweets()" ng-disabled="canSend()">
+                            Delete Tweets
+                        </button>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <label for="favourited">Keep Favourited</label>
+                        <select id="favourited" ng-init="keepFavorited = favoritedChoices[0]" ng-model="keepFavorited"
+                                ng-options="x for x in favoritedChoices">
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div ng-show="deleteMessage" class="alert alert-success">
+                    {{deleteMessage}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                    <button type="submit" class="btn btn-primary"
+                            ng-click="exportAllTweets()" ng-disabled="canSend()">
+                        Archive Tweets
+                    </button>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <label for="extension">Extension</label>
+                    <select id="extension" ng-init="extension = extensions[0]" ng-model="extension"
+                            ng-options="x for x in extensions">
+                    </select>
+                </div>
+            </div>
+        </form>
+        <br>
+        <div ng-show="exportFilePath" class="alert alert-success">
+            Twitter archive file: <b><a ng-href="http://localhost:8080/exported/{{exportFilePath}}" target="_blank">{{exportFilePath}}</a></b>
+        </div>
+    </div>
+</div>
+</body>
+</html>
